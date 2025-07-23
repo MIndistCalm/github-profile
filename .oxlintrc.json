@@ -1,0 +1,13 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "style": "warn"
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-alert": "error",
+    "no-debugger": "error"
+  },
+  "plugins": ["react", "typescript", "oxc"]
+} 
