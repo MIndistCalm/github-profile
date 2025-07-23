@@ -5,14 +5,13 @@ interface RepoCardProps {
   idx: number
 }
 
-export const RepoCard = ({ repo, idx }: RepoCardProps) => {
+export const RepoCard = ({ repo }: RepoCardProps) => {
   //   const [size, setSize] = useState<string>('')
 
   //   useEffect(() => {
   //     const sizes = ['col-span-1 row-span-1', 'col-span-2 row-span-1', 'col-span-1 row-span-2', 'col-span-2 row-span-2']
   //     setSize(sizes[Math.floor(Math.random() * sizes.length)])
   //   }, [])
-  console.log(repo)
   return (
     <a
       href={repo.html_url}
