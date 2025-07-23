@@ -84,6 +84,7 @@ function App() {
           loading={loading}
           userData={userData}
           error={error}
+          hasRepos={!!reposData}
           onSearch={handleSearch}
           onShowRepos={handleShowRepos}
         />

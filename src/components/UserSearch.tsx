@@ -33,9 +33,9 @@ const UserSearch: React.FC<UserSearchProps> = ({ onSearch }) => {
           value={formik.values.username}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          className="w-full sm:w-auto flex-1"
+          className="w-full sm:w-auto flex-1 text-2xl h-10"
         />
-        <Button type="submit" className="w-full sm:w-auto">
+        <Button type="submit" className="w-full h-10 sm:w-auto">
           Найти
         </Button>
       </div>

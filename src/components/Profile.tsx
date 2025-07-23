@@ -9,6 +9,7 @@ interface ProfileProps {
   publicRepos?: number
   followers?: number
   following?: number
+  hasRepos?: boolean
   onShowRepos?: VoidFunction
 }
 
@@ -20,6 +21,7 @@ export const Profile = ({
   publicRepos,
   followers,
   following,
+  hasRepos = false,
   onShowRepos = () => {},
 }: ProfileProps) => {
   return (
@@ -33,7 +35,7 @@ export const Profile = ({
         <p className="text-stone-500 dark:text-stone-300">@{login || 'username'}</p>
         <p className="text-center text-stone-700 dark:text-stone-200 mb-2">{bio || 'Биография пользователя'}</p>
         <div className="flex gap-4 text-sm text-stone-700 dark:text-stone-200">
-          <span className="cursor-pointer" onClick={onShowRepos}>
+          <span className="cursor-pointer text-sky-300 hover:text-sky-600" onClick={() => !hasRepos && onShowRepos()}>
             Репозиториев: <b>{publicRepos ?? '-'}</b>
           </span>
           <span>
