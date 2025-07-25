@@ -55,17 +55,37 @@ export function App() {
 
   const { filter, sort, language, languages, filteredRepos, setFilter, setSort, setLanguage } = useRepoFilter(reposData)
 
+  const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN
+
+  const fetchWithAuth = async (url: string) => {
+    return fetch(url, {
+      headers: GITHUB_TOKEN
+        ? { Authorization: `token ${GITHUB_TOKEN}` }
+        : undefined,
+    })
+  }
+
   const handleSearch = async (username: string) => {
     setUserData(null)
     setReposData(null)
     setError('')
     setLoading(true)
     try {
-      const res = await fetch(`https://api.github.com/users/${username}`)
+      const res = await fetchWithAuth(`https://api.github.com/users/${username}`)
+      if (res.status === 403) {
+        setError('Превышен лимит запросов к GitHub API')
+        setLoading(false)
+        return
+      }
       if (!res.ok) throw new Error('Пользователь не найден')
       const data = await res.json()
       setUserData(data)
-      const reposRes = await fetch(data.repos_url)
+      const reposRes = await fetchWithAuth(data.repos_url)
+      if (reposRes.status === 403) {
+        setError('Превышен лимит запросов к GitHub API')
+        setLoading(false)
+        return
+      }
       if (!reposRes.ok) throw new Error('Не удалось получить репозитории')
       const reposData = await reposRes.json()
       setReposData(reposData)

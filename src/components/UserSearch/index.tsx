@@ -38,19 +38,15 @@ export const UserSearch: React.FC<UserSearchProps> = ({ onSearch }) => {
 
   return (
     <div className="mb-6 flex flex-col gap-2">
-      <div className="flex flex-col sm:flex-row items-start gap-2 [@media(max-width:768px)]:gap-4">
-        <div className="flex flex-col gap-2 w-full">
-          <Input
-            type="text"
-            name="username"
-            placeholder="Введите GitHub username"
-            value={username}
-            onChange={handleSearch}
-            onKeyDown={handleKeyDown}
-            className="w-full flex-1 text-2xl py-2.5 [@media(max-width:768px)]:text-lg"
-          />
-        </div>
-      </div>
+      <Input
+        type="text"
+        name="username"
+        placeholder="Введите GitHub username"
+        value={username}
+        onChange={handleSearch}
+        onKeyDown={handleKeyDown}
+        className="w-full flex-1 text-2xl py-2.5 [@media(max-width:768px)]:text-lg"
+      />
     </div>
   )
 }
