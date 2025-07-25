@@ -70,6 +70,7 @@ export function App() {
     setReposData(null)
     setError('')
     setLoading(true)
+    // TODO create hook or use RTK
     try {
       const res = await fetchWithAuth(`https://api.github.com/users/${username}`)
       if (res.status === 403) {
