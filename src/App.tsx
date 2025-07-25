@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ThemeToggle from './components/ThemeToggle'
-import { SearchForm } from './components/SearchForm'
+import { SearchBox } from './components/SearchBox'
 import { RepoList } from './components/RepoList'
 
 export interface GitHubUser {
@@ -80,7 +80,7 @@ function App() {
         <ThemeToggle />
       </div>
       <div className="flex flex-col gap-4 w-full">
-        <SearchForm
+        <SearchBox
           loading={loading}
           userData={userData}
           error={error}

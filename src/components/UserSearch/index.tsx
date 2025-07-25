@@ -25,23 +25,25 @@ const UserSearch: React.FC<UserSearchProps> = ({ onSearch }) => {
 
   return (
     <form onSubmit={formik.handleSubmit} className="mb-6 flex flex-col gap-2">
-      <div className="flex flex-col sm:flex-row items-center gap-2">
-        <Input
-          type="text"
-          name="username"
-          placeholder="Введите GitHub username"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className="w-full sm:w-auto flex-1 text-2xl h-10"
-        />
+      <div className="flex flex-col sm:flex-row items-start gap-2 [@media(max-width:768px)]:gap-4">
+        <div className="flex flex-col gap-2 w-full">
+          <Input
+            type="text"
+            name="username"
+            placeholder="Введите GitHub username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full flex-1 text-2xl py-2.5 [@media(max-width:768px)]:text-lg"
+          />
+          {formik.touched.username && formik.errors.username && (
+            <div className="w-full text-red-500 text-sm mt-1 sm:mt-0">{formik.errors.username}</div>
+          )}
+        </div>
         <Button type="submit" className="w-full h-10 sm:w-auto">
           Найти
         </Button>
       </div>
-      {formik.touched.username && formik.errors.username && (
-        <div className="w-full text-red-500 text-sm mt-1 sm:mt-0 sm:ml-2">{formik.errors.username}</div>
-      )}
     </form>
   )
 }

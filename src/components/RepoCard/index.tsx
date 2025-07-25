@@ -6,24 +6,20 @@ interface RepoCardProps {
 }
 
 export const RepoCard = ({ repo }: RepoCardProps) => {
-  //   const [size, setSize] = useState<string>('')
-
-  //   useEffect(() => {
-  //     const sizes = ['col-span-1 row-span-1', 'col-span-2 row-span-1', 'col-span-1 row-span-2', 'col-span-2 row-span-2']
-  //     setSize(sizes[Math.floor(Math.random() * sizes.length)])
-  //   }, [])
   return (
     <a
       href={repo.html_url}
       target="_blank"
-      className={`repo-card cursor-pointer bg-white dark:bg-stone-700 content-stretch rounded-xl p-4 transition-all duration-300 hover:shadow-[0_0_15px_15px] dark:shadow-white shadow-gray-300 hover:z-10 hover:scale-105`}
+      className={`repo-card cursor-pointer [@media(max-width:768px)]:w-full bg-white dark:bg-stone-700 content-stretch rounded-xl p-4 transition-all duration-300 hover:shadow-[0_0_15px_15px] dark:shadow-white shadow-gray-300 hover:z-10 hover:scale-105`}
     >
       <div className="flex flex-row gap-7 justify-between items-start leading-7">
-        <span className="font-bold text-lg dark:text-white whitespace-nowrap">{repo.name}</span>
+        <span className="font-bold text-lg dark:text-white whitespace-nowrap [@media(max-width:768px)]:whitespace-normal">
+          {repo.name}
+        </span>
         <div className="flex flex-row gap-1">
           <span className="text-sm opacity-60 dark:text-gray-200">{repo.default_branch}</span>
-          <span className="text-sm opacity-60 dark:text-gray-200">
-            Created at: {new Date(repo.created_at).getUTCFullYear()}
+          <span className="text-sm opacity-60 dark:text-gray-200 [@media(max-width:768px)]:whitespace-nowrap">
+            Created: {new Date(repo.created_at).getUTCFullYear()}
           </span>
         </div>
       </div>

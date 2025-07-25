@@ -34,7 +34,7 @@ export const Profile = ({
         <h2 className="text-xl font-semibold text-stone-900 dark:text-white">{name || 'Имя пользователя'}</h2>
         <p className="text-stone-500 dark:text-stone-300">@{login || 'username'}</p>
         <p className="text-center text-stone-700 dark:text-stone-200 mb-2">{bio || 'Биография пользователя'}</p>
-        <div className="flex gap-4 text-sm text-stone-700 dark:text-stone-200">
+        <div className="flex gap-4 text-sm text-stone-700 dark:text-stone-200 [@media(max-width:768px)]:items-center [@media(max-width:768px)]:flex-col">
           <span className="cursor-pointer text-sky-300 hover:text-sky-600" onClick={() => !hasRepos && onShowRepos()}>
             Репозиториев: <b>{publicRepos ?? '-'}</b>
           </span>
