@@ -30,7 +30,9 @@ export const RepoCard = ({ repo }: RepoCardProps) => {
           <div className={`h-4 w-4 rounded-full ${repo.has_pages ? 'bg-emerald-400' : 'bg-red-400'}`} />
         </span>
         <span className="text-sm opacity-60 dark:text-gray-200">{repo.language}</span>
-        <span className="text-sm opacity-60 dark:text-gray-200">{repo.license}</span>
+        <span className="text-sm opacity-60 dark:text-gray-200">
+          {repo.license ? repo.license.name : ''}
+        </span>
         <span className="text-sm opacity-60 dark:text-gray-200">
           Last updated: {new Date(repo.updated_at).getUTCFullYear()}
         </span>

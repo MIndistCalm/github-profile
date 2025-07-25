@@ -2,6 +2,8 @@ import { useState } from 'react'
 import ThemeToggle from './components/ThemeToggle'
 import { SearchBox } from './components/SearchBox'
 import { RepoList } from './components/RepoList'
+import Filter from './components/Filter'
+import { useRepoFilter } from './hooks/useRepoFilter'
 
 export interface GitHubUser {
   avatar_url: string
@@ -32,7 +34,13 @@ export interface Repo {
   size: number
   language: string
   has_pages: boolean
-  license: null
+  license: null | {
+    key: string
+    name: string
+    spdx_id: string
+    url: string
+    node_id: string
+  }
   topics: string[]
   visibility: string
   default_branch: string
@@ -43,6 +51,8 @@ function App() {
   const [reposData, setReposData] = useState<Repo[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const { filter, sort, language, languages, filteredRepos, setFilter, setSort, setLanguage } = useRepoFilter(reposData)
 
   const handleSearch = async (username: string) => {
     setUserData(null)
@@ -74,6 +84,12 @@ function App() {
     }
   }
 
+  const handleFilterChange = (params: { filter: typeof filter; sort: typeof sort; language: string }) => {
+    setFilter(params.filter)
+    setSort(params.sort)
+    setLanguage(params.language)
+  }
+
   return (
     <div className="p-9 bg-gray-100 dark:bg-stone-900 min-h-screen h-full">
       <div className="flex flex-row justify-end">
@@ -88,7 +104,10 @@ function App() {
           onSearch={handleSearch}
           onShowRepos={handleShowRepos}
         />
-        {reposData && <RepoList repos={reposData} />}
+        {reposData && (
+          <Filter filter={filter} sort={sort} language={language} languages={languages} onChange={handleFilterChange} />
+        )}
+        {reposData && <RepoList repos={filteredRepos} />}
       </div>
     </div>
   )
