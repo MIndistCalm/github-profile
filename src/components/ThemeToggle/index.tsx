@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Switch } from '@/components/ui/switch'
+import { FaSun, FaMoon } from 'react-icons/fa'
 
 const getInitialTheme = () => {
   if (typeof window === 'undefined') return false
@@ -22,11 +22,22 @@ export const ThemeToggle = () => {
     }
   }, [dark])
 
+  const handleToggle = () => {
+    setDark(!dark)
+  }
+
   return (
-    <div className="flex items-center gap-4 justify-end bg-gray-900 transition-all w-fit rounded-xl dark:bg-gray-100">
-      <span className="text-2xl text-stone-500 dark:text-stone-300">🌞</span>
-      <Switch checked={dark} onCheckedChange={setDark} className="scale-150" />
-      <span className="text-2xl text-stone-500 dark:text-stone-300">🌙</span>
+    <div className="flex items-center gap-2">
+      <div className="relative w-8 h-8">
+        <FaSun
+          className={`absolute cursor-pointer left-0 top-0 w-8 h-8 transition-all duration-300 ${dark ? 'opacity-0 scale-75 rotate-45' : 'opacity-100 scale-100 rotate-0'} text-amber-400`}
+          onClick={handleToggle}
+        />
+        <FaMoon
+          className={`absolute cursor-pointer left-0 top-0 w-8 h-8 transition-all duration-300 ${dark ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-45'} text-stone-600`}
+          onClick={handleToggle}
+        />
+      </div>
     </div>
   )
 }
