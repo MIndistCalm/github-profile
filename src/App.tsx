@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import ThemeToggle from './components/ThemeToggle'
+import { ThemeToggle } from './components/ThemeToggle'
 import { SearchBox } from './components/SearchBox'
 import { RepoList } from './components/RepoList'
-import Filter from './components/Filter'
+import { Filter } from './components/Filter'
 import { useRepoFilter } from './hooks/useRepoFilter'
 import { FaGithub } from 'react-icons/fa'
 
@@ -47,7 +47,7 @@ export interface Repo {
   default_branch: string
 }
 
-function App() {
+export function App() {
   const [userData, setUserData] = useState<GitHubUser | null>(null)
   const [reposData, setReposData] = useState<Repo[] | null>(null)
   const [loading, setLoading] = useState(false)
@@ -65,19 +65,10 @@ function App() {
       if (!res.ok) throw new Error('Пользователь не найден')
       const data = await res.json()
       setUserData(data)
-    } catch (e: any) {
-      setError(e.message || 'Ошибка запроса')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleShowRepos = async () => {
-    try {
-      const res = userData && (await fetch(userData?.repos_url))
-      if (!res?.ok) throw new Error('Пользователь не найден')
-      const data = await res.json()
-      setReposData(data)
+      const reposRes = await fetch(data.repos_url)
+      if (!reposRes.ok) throw new Error('Не удалось получить репозитории')
+      const reposData = await reposRes.json()
+      setReposData(reposData)
     } catch (e: any) {
       setError(e.message || 'Ошибка запроса')
     } finally {
@@ -106,14 +97,7 @@ function App() {
         <ThemeToggle />
       </div>
       <div className="flex flex-col gap-4 w-full">
-        <SearchBox
-          loading={loading}
-          userData={userData}
-          error={error}
-          hasRepos={!!reposData}
-          onSearch={handleSearch}
-          onShowRepos={handleShowRepos}
-        />
+        <SearchBox loading={loading} userData={userData} error={error} onSearch={handleSearch} />
         {reposData && (
           <Filter filter={filter} sort={sort} language={language} languages={languages} onChange={handleFilterChange} />
         )}
@@ -122,5 +106,3 @@ function App() {
     </div>
   )
 }
-
-export default App

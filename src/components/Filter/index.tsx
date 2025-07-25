@@ -20,7 +20,7 @@ interface FilterProps {
   onChange: (params: { filter: FilterType; sort: SortType; language: string }) => void
 }
 
-export default function Filter({ filter, sort, language, languages, onChange }: FilterProps) {
+export const Filter = ({ filter, sort, language, languages, onChange }: FilterProps) => {
   return (
     <Card className="w-full max-w-2xl mx-auto mb-4">
       <CardHeader>
