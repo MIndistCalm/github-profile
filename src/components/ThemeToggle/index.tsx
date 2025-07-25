@@ -23,7 +23,7 @@ export default function ThemeToggle() {
   }, [dark])
 
   return (
-    <div className="flex items-center gap-4 justify-end mb-8 bg-gray-900 transition-all w-fit rounded-xl dark:bg-gray-100">
+    <div className="flex items-center gap-4 justify-end bg-gray-900 transition-all w-fit rounded-xl dark:bg-gray-100">
       <span className="text-2xl text-stone-500 dark:text-stone-300">🌞</span>
       <Switch checked={dark} onCheckedChange={setDark} className="scale-150" />
       <span className="text-2xl text-stone-500 dark:text-stone-300">🌙</span>

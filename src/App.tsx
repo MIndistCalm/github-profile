@@ -4,6 +4,7 @@ import { SearchBox } from './components/SearchBox'
 import { RepoList } from './components/RepoList'
 import Filter from './components/Filter'
 import { useRepoFilter } from './hooks/useRepoFilter'
+import { FaGithub } from 'react-icons/fa'
 
 export interface GitHubUser {
   avatar_url: string
@@ -92,7 +93,16 @@ function App() {
 
   return (
     <div className="p-9 bg-gray-100 dark:bg-stone-900 min-h-screen h-full">
-      <div className="flex flex-row justify-end">
+      <div className="flex flex-row justify-between items-center mb-2">
+        <a
+          href="https://github.com/MIndistCalm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-white hover:text-blue-600 transition-colors"
+        >
+          <FaGithub className="text-2xl" />
+          GitHub
+        </a>
         <ThemeToggle />
       </div>
       <div className="flex flex-col gap-4 w-full">
